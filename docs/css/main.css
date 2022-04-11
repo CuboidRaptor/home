@@ -1,6 +1,11 @@
 @font-face {
     font-family: DTMMono;
-    src: url("../fonts/cDTMMono.ttf");
+    src: url("../fonts/DTMMono.ttf");
+}
+
+@font-face {
+    font-family: MC;
+    src: url("../fonts/Minecraft.ttf");
 }
 
 body {
@@ -25,4 +30,9 @@ body {
 .dtmmono {
 	color: #000000;
 	font-family: "DTMMono";
+}
+
+.mc {
+	color: #030101;
+	font-family: "MC"
 }
