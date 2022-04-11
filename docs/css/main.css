@@ -1,3 +1,8 @@
+@font-face {
+    font-family: DTMMono;
+    src: url("../fonts/cDTMMono.ttf");
+}
+
 body {
 	background-image: url("../img/loogoo.png");
 	background-size: cover;
@@ -15,4 +20,9 @@ body {
 .sans {
 	color: #000201;
 	font-family: "Open Sans";
+}
+
+.dtmmono {
+	color: #000000;
+	font-family: "DTMMono";
 }
