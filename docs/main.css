@@ -1,0 +1,13 @@
+body {
+	background-image: url('loogoo.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.centre {
+	text-align: center;
+}
+
+.light {
+	background-color: #FE0155;
+}
