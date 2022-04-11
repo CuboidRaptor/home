@@ -1,5 +1,5 @@
 body {
-	background-image: url('loogoo.png');
+	background-image: url("../img/loogoo.png");
 	background-size: cover;
 	background-repeat: no-repeat;
 }
@@ -10,4 +10,9 @@ body {
 
 .light {
 	background-color: #FE0155;
+}
+
+.sans {
+	color: #000201;
+	font-family: "Open Sans";
 }
