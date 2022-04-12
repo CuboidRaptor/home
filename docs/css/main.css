@@ -9,9 +9,14 @@
 }
 
 body {
-	background-image: url("../img/loogoo.png");
-	background-size: cover;
-	background-repeat: no-repeat;
+    /* Here, it sets all body elements to have a background image. However, resizing the window causes it to go out of whack. Let's fix this! */
+    background-image: url("../img/loogoo.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
 }
 
 .centre {
