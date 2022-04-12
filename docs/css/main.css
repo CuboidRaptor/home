@@ -9,22 +9,11 @@
 }
 
 body {
-    /* Here, it sets all body elements to have a background image. However, resizing the window causes it to go out of whack. Let's fix this! */
-    background-image: url("../img/loogoo.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
-    margin: 0;
-    padding: 0;
+    background-color: #01FEAA;
 }
 
 .centre {
 	text-align: center;
-}
-
-.light {
-	background-color: #FE0155;
 }
 
 .sans {
@@ -40,4 +29,47 @@ body {
 .mc {
 	color: #030101;
 	font-family: "MC"
+}
+
+.sideNav {
+   height: 100vh;
+   width: 0;
+   position: fixed;
+   z-index: 1;
+   top: 0;
+   left: 0;
+   background-color: #FE0155;
+   overflow-x: hidden;
+   padding-top: 60px;
+   transition: 0.69s;
+}
+.sideNav a {
+   padding: 8px 8px 8px 32px;
+   text-decoration: none;
+   font-size: 25px;
+   color: #000000;
+   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+   display: block;
+   transition: 0.414s;
+}
+.sidenav a:hover {
+   color: #f1f1f1;
+}
+.sideNav .closeBtn {
+   position: absolute;
+   top: 0;
+   right: 25px;
+   font-size: 36px;
+   margin-left: 50px;
+}
+button {
+   padding: 15px;
+   background-color: #FEAA01;
+   color: #000000;
+   font-size: 20px;
+   border: none;
+   border-radius: 2%;
+}
+.main-content{
+   transition: 0.69s;
 }
