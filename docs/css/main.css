@@ -30,7 +30,15 @@ body {
 
 .mc {
 	color: #030101;
-	font-family: "MC"
+	font-family: "MC";
+}
+
+p {
+    font-size: 24px;
+}
+
+h1 {
+    font-size: 50px;
 }
 
 .sideNav {
@@ -45,6 +53,7 @@ body {
    padding-top: 60px;
    transition: 0.69s;
 }
+
 .sideNav a {
    padding: 8px 8px 8px 32px;
    text-decoration: none;
@@ -54,9 +63,11 @@ body {
    display: block;
    transition: 0.414s;
 }
+
 .sidenav a:hover {
    color: #f1f1f1;
 }
+
 .sideNav .closeBtn {
    position: absolute;
    top: 0;
@@ -64,6 +75,7 @@ body {
    font-size: 36px;
    margin-left: 50px;
 }
+
 button {
    padding: 15px;
    background-color: #FEAA01;
@@ -72,6 +84,7 @@ button {
    border: none;
    border-radius: 2%;
 }
+
 .main-content{
    transition: 0.69s;
 }
