@@ -14,6 +14,8 @@ body {
 
 .centre {
 	text-align: center;
+	margin: auto;
+	display:block;
 }
 
 .sans {
