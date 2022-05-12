@@ -85,6 +85,10 @@ button {
    border-radius: 2%;
 }
 
-.main-content{
+.main-content {
    transition: 0.69s;
+}
+
+.floatLeft {
+	float: left;
 }
