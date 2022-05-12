@@ -1,11 +1,6 @@
 @font-face {
-    font-family: DTMMono;
-    src: url("../fonts/DTMMono.ttf");
-}
-
-@font-face {
-    font-family: MC;
-    src: url("../fonts/Minecraft.ttf");
+    font-family: Aquire;
+    src: url("../fonts/AquireLight.ttf");
 }
 
 body {
@@ -26,14 +21,8 @@ body {
 	color: #000201;
 }
 
-.dtmmono {
-	color: #000000;
-	font-family: "DTMMono";
-}
-
-.mc {
-	color: #030101;
-	font-family: "MC";
+.aquire {
+	font-family: "Aquire";
 }
 
 p {
