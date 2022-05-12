@@ -19,8 +19,11 @@ body {
 }
 
 .sans {
-	color: #000201;
 	font-family: "Open Sans";
+}
+
+.black {
+	color: #000201;
 }
 
 .dtmmono {
@@ -91,4 +94,12 @@ button {
 
 .floatLeft {
 	float: left;
+}
+
+li {
+  margin-bottom: 40px;
+}
+
+li:last-child {
+ margin-bottom: 0px;
 }
