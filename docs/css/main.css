@@ -4,8 +4,8 @@
 }
 
 @font-face {
-    font-family: EOTG;
-    src: url("../fonts/EdgeOfTheGalaxyRegular.ttf");
+    font-family: TBB;
+    src: url("../fonts/TimeBurnerBold.ttf");
 }
 
 @font-face {
@@ -35,8 +35,8 @@ body {
 	font-family: "Aquire";
 }
 
-.eotg {
-	font-family: "EOTG";
+.tbb {
+	font-family: "TBB";
 }
 
 .futura {
