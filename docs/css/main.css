@@ -124,6 +124,6 @@ li:last-child {
 
 .box {
   border: 2px solid;
-  box-shadow: 4px 8px;
+  box-shadow: 4px 8px #282829;
   width: 400px;
 }
