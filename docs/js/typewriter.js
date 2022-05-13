@@ -15,14 +15,14 @@ typewriter = () => {
 	document.querySelector("#target").innerHTML = quoteArray[textNum].substring(0, textPosition) + '<span class="blink">|</span>';
 	if (mode == "w") {
 		textPosition++;
-		var speed = 70;
+		var speed = 100;
 	} else {
 		textPosition--;
-		var speed = 100;
+		var speed = 60;
 	}
 	
 	if (doneDelay) {
-		speed = 1000;
+		speed = doneDelay;
 		doneDelay = false;
 	}
 	
@@ -30,12 +30,12 @@ typewriter = () => {
 		if (textPosition < quoteArray[textNum].length) {
 			mode = "w";
 		} else {
-			doneDelay = true;
+			doneDelay = 1200;
 			mode = "d";
 		}
 	} else if (mode == "d") {
 		if (textPosition == 0) {
-			doneDelay = true;
+			doneDelay = 1000;
 			textNum++;
 			
 			if (textNum >= quoteArray.length) {
