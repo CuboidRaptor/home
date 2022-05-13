@@ -128,3 +128,13 @@ li {
 li:last-child {
 	margin-bottom: 0px;
 }
+
+.blink {
+	animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+	50% {
+		opacity: 0;
+	}
+}
