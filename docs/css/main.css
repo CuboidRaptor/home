@@ -128,3 +128,13 @@ li:last-child {
 .tiny {
     font-size: 8px;
 }
+
+img {
+	width: 100%;
+}
+
+.box {
+  border: 2px solid;
+  box-shadow: 4px 8px #282829;
+  width: 400px;
+}

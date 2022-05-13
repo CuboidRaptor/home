@@ -3,7 +3,12 @@ var quoteArray = [
 	"I'm a dumb guy who makes youtube videos.",
 	"I'm also a nerd who writes programs.",
 	"Sometimes my programs even turn out to be useful.",
-	"I play all sorts of stuff on my youtube channel, such as Minecraft, Undertale, Celeste, etc."
+	"I play all sorts of stuff on my youtube channel, such as Minecraft, Undertale, Celeste, etc.",
+	"Please subscribe, or something.",
+	"Oh wait, I didn't give you the link, did I.",
+	"So, it's in the sidebar that just so happens to be at the top-left of this page.",
+	"Have you subscribed? No? Yeah, that's about what I expected.",
+	"Anyways, I guess the clever piece of JavaScript in this page that is typing my text can loop back to the beginning now."
 ];
 var textPosition = 0; 
 var mode = "w";
