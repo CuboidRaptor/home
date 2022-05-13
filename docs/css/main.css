@@ -14,7 +14,7 @@
 }
 
 body {
-    background-image: url("../img/tile.png");
+    background-image: url("../img/greenTile.png");
 }
 
 .centre {
@@ -58,7 +58,7 @@ h1 {
 	z-index: 1;
 	top: 0;
 	left: 0;
-	background-color: #FE0155;
+	background-image: url("../img/redTile.png");
 	overflow-x: hidden;
 	padding-top: 60px;
 	transition: 0.69s;
