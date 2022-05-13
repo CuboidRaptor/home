@@ -121,3 +121,9 @@ li:last-child {
 		opacity: 0;
 	}
 }
+
+.box {
+  border: 2px solid;
+  box-shadow: 4px 8px;
+  width: 400px;
+}
