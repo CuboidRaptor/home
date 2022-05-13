@@ -19,8 +19,21 @@ body {
 
 .centre {
 	text-align: center;
-	margin: auto;
-	display:block;
+	display: block;
+	margin: 0 auto;
+}
+
+.offsetOne {
+	display: flex;
+	margin: 1px;
+	padding: 5px;
+	position: relative;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
 }
 
 .black {
@@ -99,13 +112,15 @@ button {
 }
 
 .floatLeft {
-	float: left;
+	position: absolute;
+	top: 42;
+	left: 42;
 }
 
 li {
-  margin-bottom: 40px;
+	margin-bottom: 40px;
 }
 
 li:last-child {
- margin-bottom: 0px;
+	margin-bottom: 0px;
 }
