@@ -18,7 +18,7 @@
     src: url("../fonts/DOS.ttf");
 }
 
-body {
+.default body {
     background-image: url("../img/greenTile.png");
 	min-height: 100vh;
 	display: grid;
@@ -146,7 +146,7 @@ img {
 
 .bsod {
 	font-size: 20px;
-	background-color: #041375 !important;
+	background-color: #041375;
 	color: #FFFFFF;
 	font-family: "DOS";
 }
