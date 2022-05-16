@@ -1,25 +1,25 @@
 @font-face {
     font-family: Aquire;
-    src: url("../fonts/Aquire.ttf");
+    src: url("/fonts/Aquire.ttf");
+}
+
+@font-face {
+	font-family: DOS;
+	src: url("/fonts/DOS.ttf");
 }
 
 @font-face {
     font-family: TBB;
-    src: url("../fonts/TimeBurnerBold.ttf");
+    src: url("/fonts/TimeBurnerBold.ttf");
 }
 
 @font-face {
     font-family: Futura;
-    src: url("../fonts/FuturaRener.ttf");
-}
-
-@font-face {
-    font-family: DOS;
-    src: url("../fonts/DOS.ttf");
+    src: url("/fonts/FuturaRener.ttf");
 }
 
 .default {
-    background-image: url("../img/greenTile.png");
+    background-image: url("/img/greenTile.png");
 	min-height: 100vh;
 	display: grid;
 	grid-template-rows: auto 1fr auto;
@@ -41,6 +41,13 @@
 
 .tbb {
 	font-family: "TBB";
+}
+
+.bsod {
+	font-size: 20px;
+	background-color: #041375;
+	color: #FFFFFF;
+	font-family: "DOS";
 }
 
 .futura {
@@ -66,7 +73,7 @@ h1 {
 	z-index: 1;
 	top: 0;
 	left: 0;
-	background-image: url("../img/redTile.png");
+	background-image: url("/img/redTile.png");
 	overflow-x: hidden;
 	padding-top: 60px;
 	transition: 0.69s;
@@ -142,11 +149,4 @@ img {
   border: 2px solid;
   box-shadow: 4px 8px #282829;
   width: 400px;
-}
-
-.bsod {
-	font-size: 20px;
-	background-color: #041375;
-	color: #FFFFFF;
-	font-family: "DOS";
 }
