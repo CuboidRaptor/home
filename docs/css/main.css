@@ -145,6 +145,7 @@ img {
 }
 
 .bsod {
+	font-size: 20px;
 	background-color: #041375 !important;
 	color: #FFFFFF;
 	font-family: "DOS";
