@@ -13,6 +13,11 @@
     src: url("../fonts/FuturaRener.ttf");
 }
 
+@font-face {
+    font-family: DOS;
+    src: url("../fonts/DOS.ttf");
+}
+
 body {
     background-image: url("../img/greenTile.png");
 	min-height: 100vh;
@@ -137,4 +142,10 @@ img {
   border: 2px solid;
   box-shadow: 4px 8px #282829;
   width: 400px;
+}
+
+.bsod {
+	background-color: #0827F5;
+	color: #FFFFFF;
+	font-family: "DOS";
 }
