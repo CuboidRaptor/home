@@ -1,3 +1,5 @@
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)\.html$ /$1 [L,R=302]
+
+ErrorDocument 404 ./404.html
