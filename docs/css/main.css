@@ -150,3 +150,8 @@ img {
   box-shadow: 4px 8px #282829;
   width: 400px;
 }
+
+code {
+	font-family: monospace, monospace;
+	background-color: #01cb88;
+}
