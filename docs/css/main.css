@@ -1,21 +1,16 @@
 @font-face {
-    font-family: Aquire;
-    src: url("../fonts/Aquire.ttf");
-}
-
-@font-face {
 	font-family: DOS;
 	src: url("/fonts/DOS.ttf");
 }
 
 @font-face {
-    font-family: TBB;
-    src: url("../fonts/TimeBurnerBold.ttf");
+    font-family: JosefinSans;
+    src: url("../fonts/JosefinSans.ttf");
 }
 
 @font-face {
-    font-family: JosefinSans;
-    src: url("../fonts/JosefinSans.ttf");
+    font-family: KTP;
+    src: url("../fonts/KdamThmorPro.ttf");
 }
 
 .default {
@@ -35,14 +30,6 @@
 	color: #000201;
 }
 
-.aquire {
-	font-family: "Aquire";
-}
-
-.tbb {
-	font-family: "TBB";
-}
-
 .bsod {
 	font-size: 20px;
 	background-color: #041375;
@@ -52,6 +39,10 @@
 
 .josefin {
 	font-family: "JosefinSans";
+}
+
+.ktp {
+	font-family: "KTP";
 }
 
 .shadow {
