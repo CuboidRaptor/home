@@ -14,8 +14,8 @@
 }
 
 @font-face {
-    font-family: Futura;
-    src: url("../fonts/FuturaRener.ttf");
+    font-family: JosefinSans;
+    src: url("../fonts/JosefinSans.ttf");
 }
 
 .default {
@@ -50,8 +50,8 @@
 	font-family: "DOS";
 }
 
-.futura {
-	font-family: "Futura";
+.josefin {
+	font-family: "JosefinSans";
 }
 
 .shadow {
