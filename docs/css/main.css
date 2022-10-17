@@ -23,7 +23,7 @@
 }
 
 .edd {
-	background-image: url("../img/yellowTile.png");
+	background-image: url("../img/blueTile.png");
 	min-height: 100vh;
 	display: grid;
 	grid-template-rows: auto 1fr auto;
