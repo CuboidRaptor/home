@@ -157,3 +157,9 @@ code {
 	font-family: monospace, monospace;
 	background-color: #01cb88;
 }
+
+/* crappy hack for stupid bg iframe thing */
+.bg {
+	width: 100%;
+	height: 100%;
+}
