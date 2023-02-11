@@ -20,6 +20,11 @@
 	min-height: 100vh;
 	display: grid;
 	grid-template-rows: auto 1fr auto;
+	
+	border: 0px;
+	padding: 0px;
+	margin: 0px;
+	display: block;
 }
 
 .edd {
@@ -158,6 +163,12 @@ code {
 	background-color: #01cb88;
 }
 
+#poopoo {
+	/* my logo but I resized it to fix shiet */
+	width: 200px;
+	height: auto;
+}
+
 /* stupid bg hack */
 .page {
 	z-index: 2;
@@ -167,4 +178,8 @@ code {
 .bg {
 	z-index: 1;
 	position: absolute;
+	
+	width: 100vw;
+	height: auto;
+	overflow: hidden;
 }
