@@ -1,3 +1,8 @@
+@font-face {
+	font-family: noto;
+	src: url("/fonts/NotoColorEmoji.ttf");
+}
+
 body{
 	margin:0;
 	overflow: hidden;
@@ -5,7 +10,7 @@ body{
 
 	font-family: 'OpenSansEmoji', Helvetica, Arial, sans-serif;
 	font-weight: 100;
-	font-size: 16px;
+	font-size: 32px;
 }
 
 div{
@@ -29,7 +34,10 @@ THE GRID
 #grid, #grid_bg{
 	position: absolute;
 	margin: auto;
-	top:0; left:0; right:0; bottom:0;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 	cursor: default;
 }
 #grid>div>div{
@@ -37,7 +45,7 @@ THE GRID
 }
 #grid>div>div{
 	line-height: 1em;
-	text-align: center;
+	text-align: left;
 }
 #grid_bg>div{
 	position: absolute;

@@ -17,7 +17,7 @@
 /* Miscellaneous classes */
 .default {
     background-image: url("../img/greenTile.png");
-	min-height: 100vh;
+	/* min-height: 100vh; */
 	display: grid;
 	grid-template-rows: auto 1fr auto;
 	
@@ -25,6 +25,8 @@
 	padding: 0px;
 	margin: 0px;
 	display: block;
+	
+	overflow-x: hidden;
 }
 
 .edd {
@@ -107,16 +109,17 @@ h1 {
 }
 
 button {
-	padding: 15px;
 	background-color: #FEAA01;
 	color: #000000;
 	font-size: 20px;
 	border: none;
 	border-radius: 2%;
+	padding: 15px;
 }
 
 .main-content {
 	transition: 0.69s;
+	margin-left: 20px;
 }
 
 /* idfk at this point tbh */
@@ -178,8 +181,23 @@ code {
 .bg {
 	z-index: 1;
 	position: absolute;
+	top: 0;
+	left: 0px; 
+	bottom: 0px;
+	right: 0px;
 	
 	width: 100vw;
-	height: auto;
+	height: 100vh;
 	overflow: hidden;
+	/* max-width: 100%; */
+	
+	border: 0px;
+	padding: 0px;
+	margin: 0px;
+	display: block;
+}
+
+.bg iframe {
+	position: relative;
+	left: -8px; /* emojis are buggy so shift them */
 }

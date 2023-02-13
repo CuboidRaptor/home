@@ -5,8 +5,8 @@ function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
         results = regex.exec(location.search);
-    // return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-	return "model";
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+	// return "model";
 }
 
 // Local or Remote or URL?
@@ -19,7 +19,7 @@ if(local = getParameterByName("s")){ // note: "=" not "=="
 }else if(url = getParameterByName("url")){ // yup: "=" not "=="
     path = url;
 }else{
-    path = "models/forest.json";
+    path = "models/model.json";
 }
 
 let onLoadSuccess = (model)=>{
