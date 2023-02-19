@@ -24,6 +24,9 @@ typewriter = () => {
 		textPosition++;
 		var speed = 100;
 	} else {
+		if (quoteArray[textNum][textPosition] == "^") {
+			textPosition--;
+		}
 		textPosition--;
 		var speed = 60;
 	}
