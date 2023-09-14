@@ -28,6 +28,9 @@ typewriter = () => {
 			textPosition--;
 		}
 		textPosition--;
+        if (quoteArray[textNum][textPosition] == "^") {
+			textPosition--;
+		} // yes this check is run twice I can't be fk bothered to read my own code
 		var speed = 60;
 	}
 	
