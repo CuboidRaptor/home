@@ -1,4 +1,7 @@
-# IMPORTANT:
+import subprocess
+import msvcrt
+
+powershell_script = r"""# IMPORTANT:
 
 # You have to disable tamper protection (enable it afterwards please please please)
 
@@ -27,3 +30,20 @@ start-service WdNisSvc
 echo "guest go bye bye"
 
 #Remove-LocalUser -name "Guest"
+"""
+
+batch_script = """powershell "Set-ExecutionPolicy Bypass"
+powershell ./mungus.ps1
+powershell "Set-ExecutionPolicy Default"
+"""
+
+with open("mungus.ps1", "w") as f:
+    f.write(powershell_script)
+
+with open("batch.bat", "w") as f:
+    f.write(batch_script)
+
+subprocess.call(f"batch.bat")
+
+print("Press any key to continue . . . ")
+msvcrt.getch()
