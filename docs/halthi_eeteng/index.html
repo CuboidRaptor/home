@@ -166,10 +166,6 @@ We&#39;re gonna be playing a buncha random healthy eating games.
 Notice that in many cases there could be multiple right answers.
 
 [[sounds fun?-&gt;qAvC (Node_1)]]
-
-&lt;&lt;set $muzak = 1&gt;&gt;
-&lt;&lt;set $rights = 0&gt;&gt;
-&lt;&lt;set $wrongs = 0&gt;&gt;
 </tw-passagedata><tw-passagedata pid="3" name="CREDITS" tags="" position="300,400" size="100,100">Game made by Jason, Saisha.
 Engine by Twine Team.
 SugarCube format by Thomas Michael Edwards.
@@ -234,7 +230,6 @@ Music index:
 
 		&lt;&lt;audio &quot;bgm_default3&quot; volume 0.2 loop play&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
-&lt;&lt;/if&gt;&gt;
 
 &lt;&lt;elseif $muzak == 4&gt;&gt;
 	&lt;&lt;if !(isPlaying(&quot;bgm_default4&quot;))&gt;&gt;
@@ -246,7 +241,6 @@ Music index:
 
 		&lt;&lt;audio &quot;bgm_default4&quot; volume 0.2 loop play&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
-&lt;&lt;/if&gt;&gt;
 
 &lt;&lt;elseif $muzak == 5&gt;&gt;
 	&lt;&lt;if !(isPlaying(&quot;bgm_troll&quot;))&gt;&gt;
@@ -256,9 +250,8 @@ Music index:
 			&lt;&lt;cacheaudio &quot;bgm_troll&quot; &quot;https://cuboidraptor.github.io/halthi_eeteng/audio/dogsong.aac?dl=1&amp;ext=.aac&quot;&gt;&gt;
 		&lt;&lt;/if&gt;&gt;
 
-		&lt;&lt;audio &quot;bgm_troll&quot; volume 0.2 loop play&gt;&gt;
+		&lt;&lt;audio &quot;bgm_troll&quot; volume 0.3 loop play&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
-&lt;&lt;/if&gt;&gt;
 
 &lt;&lt;elseif $muzak == 6&gt;&gt;
 	&lt;&lt;if !(isPlaying(&quot;bgm_challenge&quot;))&gt;&gt;
@@ -270,6 +263,7 @@ Music index:
 
 		&lt;&lt;audio &quot;bgm_challenge&quot; volume 0.2 loop play&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
+
 &lt;&lt;/if&gt;&gt;
 
 &lt;!-- goofy lazer sound --&gt;
@@ -288,7 +282,11 @@ GAME 1
 Which is healthier? An apple, or chocolate?
 
 [[Apple][$rights += 1]]
-[[Chocolate][$wrongs += 1]]</tw-passagedata><tw-passagedata pid="7" name="Apple" tags="" position="1000,300" size="100,100">&lt;div class=&quot;big centre&quot;&gt;
+[[Chocolate][$wrongs += 1]]
+
+&lt;&lt;set $muzak = 1&gt;&gt;
+&lt;&lt;set $rights = 0&gt;&gt;
+&lt;&lt;set $wrongs = 0&gt;&gt;</tw-passagedata><tw-passagedata pid="7" name="Apple" tags="" position="1000,300" size="100,100">&lt;div class=&quot;big centre&quot;&gt;
 Correct!
 &lt;/div&gt;
 On the whole, apples are more healthy. Do you know why?
