@@ -80,3 +80,17 @@ function clickHandler()
 }
 
 dmode.addEventListener("click", clickHandler)
+
+// check dmode on first opening
+var date = new Date();
+title = document.getElementById("wstitle");
+if ((date.getHours() >= 20) || (date.getHours() < 8))
+{
+    document.documentElement.style.mixBlendMode = "difference";
+    title.innerText = "WELCOME TO BLACK SPACE.";
+}
+else
+{
+    document.documentElement.style.mixBlendMode = "normal";
+    title.innerText = "WELCOME TO WHITE SPACE.";
+}
