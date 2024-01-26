@@ -94,3 +94,75 @@ else
     document.documentElement.style.mixBlendMode = "normal";
     title.innerText = "WELCOME TO WHITE SPACE.";
 }
+
+// qotd
+quotes = `Just because you did something bad, doesn't make you a bad person.
+All it costs is your love!
+You'd forgive youself, won't you Sunny?
+Goodbye... little brother.
+I fucking love air-conditioning.
+You just shouldn't have looked.
+Promise me we'll always be there for each other.
+What if it's up to you? What if it's only up to you?
+The sun shined brighter... when she was here...
+You are far away from home.
+It's a long way down... do you want to jump?
+I have to tell you something.
+Friends... friends are supposed to be there for each other.
+A place to survive, but not to live.
+An unallowed burden has been placed upon you. You have the power to change the future.
+What will you do, DREAMER? What will you do?
+Everything is going to be okay.
+Don't be afraid. It's not as scary as you think.
+No bandage can stifle and eternal wound... and there will be a time when it's influence will bleed through.
+Waiting for something to happen?
+It might be easier to ignore your problems, but it's okay to cry about them too.
+You can see it too, can't you? Something... something behind you...
+There is nothing here.
+Maybe one day... things can go back to the way they were before.
+Close your eyes
+Oyasumi
+There's no way out of this, is there?
+Left, right, up, it doesn't matter! It's all forward, isn't it?
+Pain doesn't last forever.
+Trying to lose yourself? Or have you accomplished that already?
+The DREAMER could run and bury away his fears, but one still has to face his own reflection.
+MEWO has been very, very bad.
+With time, what is important will change. You must choose what you will keep and what you will cast away.
+Humans are bounded creatures. Your limits are what define you. What makes you human?
+When trouble shows itself, there is always the choice to run. But one day, you may very well find yourself running alone.
+My thoughts will follow you into your dreams.`.split("\n");
+
+datestamp = Math.floor((new Date().getTime()) / 86400000);
+
+var qn = localStorage.getItem("qn");
+
+if (qn == null) // no qotd
+{
+    qn = Math.floor(Math.random() * quotes.length);
+    quote = quotes[qn];
+    localStorage.setItem("qn", qn + "," + (datestamp + 1));
+}
+else
+{
+    q = qn.split(",");
+    qexp = q[1];
+    qn = q[0];
+    
+    if ((qexp < datestamp) || ((qn >= quotes.length))) // expired qotd or invalid length (update?)
+    {
+        console.log(qexp);
+        console.log(datestamp);
+        qn = Math.floor(Math.random() * quotes.length);
+        quote = quotes[qn];
+        localStorage.setItem("qn", qn + "," + (datestamp + 1));
+    }
+    else // valid
+    {
+        quote = quotes[qn];
+    }
+}
+
+quoteElem = document.getElementById("quote");
+
+quoteElem.innerText = quote;

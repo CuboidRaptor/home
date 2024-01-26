@@ -21,26 +21,41 @@ body {
     
     text-align: left;
     margin-left: -10%;
+    
+    position: absolute;
 }
 
 .txt {
     font-family: "OMORI";
     color: black;
+}
+
+.centre {
     text-align: center;
+}
+
+.bottomtxt {
+    position: fixed;
+    bottom: 5vh;
+    left: 5vw;
 }
 
 .bottomimg {
     position: fixed;
     bottom: 0px;
     left: 60vw;
+    
+    max-width: 20vw;
+    max-height: 50vh;
+    object-fit: contain;
 }
 
 .textbox {
-    margin-top: 5vh;
-    text-align: right;
-    margin-right: 15vw;
+    top: 5vh;
+    right: 15vw;
     float: right;
     width: 40vw;
+    position: absolute;
 }
 
 .dmode {
@@ -50,9 +65,13 @@ body {
 }
 
 h1 {
-    font-size: 64px;
+    font-size: 8vh;
 }
 
 h2 {
-    font-size: 32px;
+    font-size: 5vh;
+}
+
+p {
+    font-size: 3vh;
 }
