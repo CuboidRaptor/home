@@ -38,6 +38,8 @@ body {
     position: fixed;
     bottom: 5vh;
     left: 5vw;
+    
+    max-width: 50vw;
 }
 
 .bottomimg {
@@ -58,10 +60,16 @@ body {
     position: absolute;
 }
 
-.dmode {
+#dmode {
     float: right;
     margin-top: 0px;
     margin-right: 0px;
+}
+
+#spkr {
+    float: right;
+    margin-top: 0px;
+    margin-right: 8px;
 }
 
 h1 {

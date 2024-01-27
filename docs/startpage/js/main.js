@@ -14,7 +14,8 @@ function addZero(dateN)
     return dateS;
 }
 
-var datetxt = document.getElementById("date"); // set date object
+var datetxt = document.getElementById("date"); // set date objects
+var utimestamp = document.getElementById("utimestamp");
 
 const dcids = [];
 
@@ -35,6 +36,25 @@ document.addEventListener("visibilitychange", (event) => { // restart clock on r
     }
 });
 
+function utcOffsetFormat(date)
+{
+    var tzo = date.getTimezoneOffset();
+    
+    if (tzo < 0)
+    {
+        tzo = -tzo
+        return "UTC+" + `${addZero(Math.floor(tzo / 60))}:${addZero(tzo % 60)}`;
+    }
+    else if (tzo > 0)
+    {
+        return "UTC-" + `${addZero(Math.floor(tzo / 60))}:${addZero(tzo % 60)}`;
+    }
+    else
+    {
+        return "UTC+00:00";
+    }
+}
+
 function checkDate(dcid=-69) // check the current date, update
 {
     if (dcid != -69)
@@ -46,10 +66,27 @@ function checkDate(dcid=-69) // check the current date, update
         }
     }
     
+    // check dmode so it changes at the start of every period
+    var date = new Date();
+    title = document.getElementById("wstitle");
+    
+    if ((date.getHours() == 20) && (date.getMinutes() == 0) && (date.getSeconds() == 0))
+    {
+        document.documentElement.style.mixBlendMode = "difference";
+        title.innerText = "WELCOME TO BLACK SPACE.";
+    }
+    else if ((date.getHours() == 8) && (date.getMinutes() == 0) && (date.getSeconds() == 0))
+    {
+        document.documentElement.style.mixBlendMode = "normal";
+        title.innerText = "WELCOME TO WHITE SPACE.";
+    }
+    
     var date = new Date();
     var dateString = `${date.getFullYear()}/${addZero(date.getMonth() + 1)}/${addZero(date.getDate())}, \
-${addZero(date.getHours())}:${addZero(date.getMinutes())}.${addZero(date.getSeconds())}`;
+${addZero(date.getHours())}:${addZero(date.getMinutes())}.${addZero(date.getSeconds())} \
+${utcOffsetFormat(date)}`;
     datetxt.innerText = `It has been ${dateString} for as long as you can remember.`;
+    utimestamp.innerText = `(${Math.floor(date.getTime() / 1000)})`;
     
     if (document.visibilityState == "visible")
     {
@@ -62,7 +99,7 @@ checkDate();
 
 //darkmode because full whitespace hurts
 
-function clickHandler()
+function clickHandlerDMode()
 {
     mbm = document.documentElement.style.mixBlendMode;
     title = document.getElementById("wstitle");
@@ -77,11 +114,47 @@ function clickHandler()
         document.documentElement.style.mixBlendMode = "difference";
         title.innerText = "WELCOME TO BLACK SPACE.";
     }
+    
+    clickHandlerSpkr(); clickHandlerSpkr(); // kill and restart music
 }
 
-dmode.addEventListener("click", clickHandler)
+var playing = false;
+var audio = undefined;
 
-// check dmode on first opening
+function clickHandlerSpkr()
+{
+    var mbm = document.documentElement.style.mixBlendMode;
+    
+    if (!playing)
+    {
+        if (mbm == "normal")
+        {
+            audio = new Audio("audio/whitespace.ogg");
+        }
+        else if (mbm == "difference")
+        {
+            audio = new Audio("audio/nawa.ogg");
+        }
+        
+        audio.loop = true;
+        playing = true;
+        audio.play();
+    }
+    else
+    {
+        audio.pause();
+        playing = false;
+    }
+    
+}
+
+var dmode = document.getElementById("dmode");
+dmode.addEventListener("click", clickHandlerDMode)
+
+var spkr = document.getElementById("spkr");
+spkr.addEventListener("click", clickHandlerSpkr)
+
+// check dmode on open
 var date = new Date();
 title = document.getElementById("wstitle");
 if ((date.getHours() >= 20) || (date.getHours() < 8))
@@ -93,7 +166,7 @@ else
 {
     document.documentElement.style.mixBlendMode = "normal";
     title.innerText = "WELCOME TO WHITE SPACE.";
-}
+    }
 
 // qotd
 quotes = `Just because you did something bad, doesn't make you a bad person.
@@ -120,7 +193,7 @@ It might be easier to ignore your problems, but it's okay to cry about them too.
 You can see it too, can't you? Something... something behind you...
 There is nothing here.
 Maybe one day... things can go back to the way they were before.
-Close your eyes
+Close your eyes, you'll be here soon.
 Oyasumi
 There's no way out of this, is there?
 Left, right, up, it doesn't matter! It's all forward, isn't it?
@@ -131,9 +204,12 @@ MEWO has been very, very bad.
 With time, what is important will change. You must choose what you will keep and what you will cast away.
 Humans are bounded creatures. Your limits are what define you. What makes you human?
 When trouble shows itself, there is always the choice to run. But one day, you may very well find yourself running alone.
+You may not be in control now... but do not lose hope, DREAMER. There are some who still believe in you.
 My thoughts will follow you into your dreams.`.split("\n");
 
-datestamp = Math.floor((new Date().getTime()) / 86400000);
+var date = new Date();
+date.setTime(date.getTime());
+datestamp = Math.floor((date.getTime()) / 86400000);
 
 var qn = localStorage.getItem("qn");
 
@@ -166,3 +242,4 @@ else
 quoteElem = document.getElementById("quote");
 
 quoteElem.innerText = quote;
+
