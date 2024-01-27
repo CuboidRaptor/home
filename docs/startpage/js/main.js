@@ -225,7 +225,7 @@ else
     qexp = q[1];
     qn = q[0];
     
-    if ((qexp < datestamp) || ((qn >= quotes.length))) // expired qotd or invalid length (update?)
+    if ((qexp <= datestamp) || ((qn >= quotes.length))) // expired qotd or invalid length (update?)
     {
         console.log(qexp);
         console.log(datestamp);
