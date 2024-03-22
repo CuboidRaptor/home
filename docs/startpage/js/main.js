@@ -240,6 +240,5 @@ else
 }
 
 quoteElem = document.getElementById("quote");
-
 quoteElem.innerText = quote;
 
