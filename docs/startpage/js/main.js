@@ -133,7 +133,7 @@ function clickHandlerSpkr()
         }
         else if (mbm == "difference")
         {
-            audio = new Audio("audio/nawa.ogg");
+            audio = new Audio("audio/welcome_again.ogg");
         }
         
         audio.loop = true;
