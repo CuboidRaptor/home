@@ -208,8 +208,7 @@ You may not be in control now... but do not lose hope, DREAMER. There are some w
 My thoughts will follow you into your dreams.`.split("\n");
 
 var date = new Date();
-date.setTime(date.getTime());
-datestamp = Math.floor((date.getTime()) / 86400000);
+datestamp = Math.floor((date.getTime() - date.getTimezoneOffset()) / 86400000);
 
 var qn = localStorage.getItem("qn");
 
