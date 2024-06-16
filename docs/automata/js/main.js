@@ -101,29 +101,33 @@ function drawLines() { // draw griddy lines
 } 
 
 function tick() { // every tick/frame
+    createCanvasGrid();
+    
     for (let i = 0; i < matrix.length; i++) {
         for (let j = 0; j < matrix[i].length; j++) {
             drawRect(matrix[i][j], j, i);
         }
     }
+    
+    drawLines();
 }
 
 function init() { // init!
-    createCanvasGrid();
-    drawLines()
-    
-    canvas.addEventListener("click", click);
     matrix = Array.from({length:sqRows}, function () {
         row = new Array(sqCols)
         
         for (let i = 0; i < row.length; i++) {
-            row[i] = Math.floor(Math.random() * colors.length);
+            row[i] = Math.floor(Math.random() * 2);
         }
         
         return row;
     });
     
     tick();
+    
+    setTimeout(tick, 1000);
+    
+    canvas.addEventListener("click", click);
 }
 
 init();
