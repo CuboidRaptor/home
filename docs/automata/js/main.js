@@ -20,6 +20,10 @@ const grid_opts = { // griddy
 
 var matrix; // matrix, will be randomly init'ed by init() on program start
 
+const rSurvive = [3, 4, 5];
+const rBirth = [2, 4];
+const rStates = 20;
+
 // by mjackson on github, slightyl modified by me
 function hsvToRgb(h, s, v) { // exactly what it sounds like
     var r, g, b;
@@ -100,16 +104,75 @@ function drawLines() { // draw griddy lines
     ctx.stroke();
 } 
 
-function tick() { // every tick/frame
+function render() { // render the frame by drawing squares
     createCanvasGrid();
     
-    for (let i = 0; i < matrix.length; i++) {
-        for (let j = 0; j < matrix[i].length; j++) {
-            drawRect(matrix[i][j], j, i);
+    for (let row = 0; row < matrix.length; row++) {
+        for (let col = 0; col < matrix[row].length; col++) {
+            drawRect(matrix[row][col], col, row);
         }
     }
     
     drawLines();
+}
+
+function matrixGet(row, col) {
+    var row = matrix[row];
+    
+    if (row == undefined) {
+        return 0;
+    }
+    
+    var val = row[col];
+    
+    return (val == undefined) ? 0 : val
+}
+
+function count(arr, item) {
+    return Array.from(
+        arr,
+        (elem) => ((elem == item) ? 1 : 0)
+    ).reduce(
+        (partialSum, a) => partialSum + a,
+        0
+    );
+}
+
+function neighbors(row, col) {
+    return [
+        matrixGet(row - 1, col - 1),
+        matrixGet(row, col - 1),
+        matrixGet(row + 1, col - 1),
+        matrixGet(row - 1, col),
+        matrixGet(row + 1, col),
+        matrixGet(row - 1, col + 1),
+        matrixGet(row, col + 1),
+        matrixGet(row + 1, col + 1)
+    ];
+}
+
+function tick() { // every tick/frame
+    var newMatrix = Array.from(new Array(matrix.length), (elem) => new Array(matrix[0].length));
+
+    for (let row = 0; row < matrix.length; row++) {
+        for (let col = 0; col < matrix[row].length; col++) {
+            let state = matrix[row][col];
+            let cur_n = neighbors(row, col); // list of neighbors
+            let cur_c = count(cur_n, state); // count of neighbors with same state
+            let cur_c1 = count(cur_n, state + 1); // count of neighbors with next state
+            
+            if (state > 0) {
+                if (rSurvive.includes(cur_c)) {
+                    newMatrix[row][col] = state;
+                }
+                else {
+                    newMatrix[row][col] = state - 1;
+                }
+            }
+        }
+    }
+    
+    render();
 }
 
 function init() { // init!
