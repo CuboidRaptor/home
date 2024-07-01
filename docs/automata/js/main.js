@@ -8,7 +8,7 @@ const sqRows = 75;
 const weight = 2;
 var sqWidth = Math.floor(Math.min(((cW) / sqCols), ((cH) / sqRows)));
 const tick_framerate = 30;
-const mouse_framerate = 120;
+const maxmousepollrate = 60;
 const outlinecolor = "#fefeff";
 
 var plmx = 0; // precision last mouse x
@@ -231,7 +231,7 @@ function tick() { // every tick/frame
 }
 
 function mousemove(e) { // take event thingy and get relative mouse position to canvas
-    if (e.timeStamp - this.pointerTimestamp < 1000/30) {
+    if (e.timeStamp - this.pointerTimestamp < (1000 / (maxmousepollrate))) {
         return
     }
     this.pointerTimestamp = e.timeStamp
