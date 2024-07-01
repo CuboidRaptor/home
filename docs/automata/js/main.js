@@ -46,11 +46,10 @@ function hsvToRgb(h, s, v) { // exactly what it sounds like
     return "#" + Math.round(r * 255).toString(16) + Math.round(g * 255).toString(16) + Math.round(b * 255).toString(16);
 }
 
-const states = 20;
 const colors = ["#000000"];
 
-for (let i = 1; i <= (states - 1); i++) {
-    colors.push(hsvToRgb(i / (states - 1), 0.69, 0.84))
+for (let i = 1; i <= (rStates - 1); i++) {
+    colors.push(hsvToRgb(i / (rStates - 1), 0.69, 0.84))
 }
 
 function drawRect(cind, x, y) { // draw rect with cind color from colors array and at grid (x, y)
@@ -69,9 +68,13 @@ function click(e) { // click listener
     var gridx = Math.round((x - (sqWidth / 2)) / sqWidth);
     var gridy = Math.round((y - (sqWidth / 2)) / sqWidth);
     
-    createCanvasGrid();
-    drawRect(1, gridx, gridy);
-    drawLines()
+    console.log(gridx, gridy);
+    console.log(matrixGet(gridy, gridx));
+    console.log(neighbors(gridy, gridx));
+    
+    //createCanvasGrid();
+    //drawRect(1, gridx, gridy);
+    //drawLines()
 }
 
 function createCanvasGrid() { // init canvas with no lines, just a rect
@@ -128,10 +131,10 @@ function matrixGet(row, col) {
     return (val == undefined) ? 0 : val
 }
 
-function count(arr, item) {
+function count(arr, cond) {
     return Array.from(
         arr,
-        (elem) => ((elem == item) ? 1 : 0)
+        (elem) => (cond(elem) ? 1 : 0)
     ).reduce(
         (partialSum, a) => partialSum + a,
         0
@@ -152,37 +155,30 @@ function neighbors(row, col) {
 }
 
 function tick() { // every tick/frame
-    var newMatrix = Array.from(new Array(matrix.length), (elem) => new Array(matrix[0].length));
+    var newMatrix = Array.from(new Array(matrix.length), (elem) => (new Array(matrix[0].length)).fill(0));
 
     for (let row = 0; row < matrix.length; row++) {
         for (let col = 0; col < matrix[row].length; col++) {
             let state = matrix[row][col];
-            let cur_n = neighbors(row, col); // list of neighbors
-            let cur_c = count(cur_n, state); // count of neighbors with same state
-            let cur_c1 = count(cur_n, state + 1); // count of neighbors with next state
+            let cur_n = neighbors(row, col); // list of neighbor rStates
+            let cur_c = count(cur_n, (elem) => (elem > 0)); // count of neighbors alive or dying state
             let changed = false;
             
+            // state 0 = dead, state <rStates - 1> = alive, state 1 - <rStates - 1> is decreasing amounts of dying
             if (state == 0) {
-                if (rBirth.includes(cur_c1)) {
-                    newMatrix[row][col] = 1;
+                if (rBirth.includes(cur_c)) {
+                    newMatrix[row][col] = rStates - 1;
                 }
             }
-            else if (state < states) {
+            else if (state > 0) {
                 let shouldSurvive = rSurvive.includes(cur_c);
                 
-                if ((state == 1) && (shouldSurvive)) {
+                if ((state == (rStates - 1)) && (shouldSurvive)) {
                     newMatrix[row][col] = state;
                 }
-                else if (!shouhldSurvive) {
-                    newMatrix[row][col] = (state + 1) % rStates;
+                else {
+                    newMatrix[row][col] = state - 1;
                 }
-                
-                if (state > 1) {
-                    newMatrix[row][col] = state + 1;
-                }
-            }
-            else if (state >= states) {
-                newMatrix[row][col] = 0;
             }
         }
     }
@@ -197,7 +193,7 @@ function init() { // init!
         row = new Array(sqCols)
         
         for (let i = 0; i < row.length; i++) {
-            row[i] = Math.floor(Math.random() * 2);
+            row[i] = (Math.floor(Math.random() * 2) == 0) ? 0 : (rStates - 1);
         }
         
         return row;
