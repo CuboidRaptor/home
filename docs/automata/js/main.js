@@ -1,29 +1,36 @@
 // consts because I want this to work for differnt viewportsspeplling is hard shut up
 const cW = document.documentElement.clientWidth;
 const cH = document.documentElement.clientHeight;
-const sqCols = 75;
-const sqRows = 50;
-const weight = 1;
+const sqCols = 100;
+const sqRows = 75;
+const weight = 2;
 var sqWidth = Math.floor(Math.min(((cW) / sqCols), ((cH) / sqRows)));
-const framerate = 30;
+const tick_framerate = 2;
+const mouse_framerate = 60;
+var lastmousex = 0;
+var lastmousey = 0 ;
+var mousex = 0;
+var mousey = 0;
+var processing = [];
 
 const canvas = document.getElementById("main_canvas");
 const ctx = canvas.getContext("2d");
 const grid_opts = { // griddy
-    cols       : sqCols,
-    rows       : sqRows,
-    width      : sqWidth * sqCols,
-    height     : sqWidth * sqRows,
-    weight     : weight,
-    background : "#000000",
-    color      : "#b8b8c8"
+    cols        : sqCols,
+    rows        : sqRows,
+    width       : sqWidth * sqCols,
+    height      : sqWidth * sqRows,
+    weight      : weight,
+    background  : "#000000",
+    color       : "#b8b8c8",
+    outlinecolor: "#fefeff"
 };
 
 var matrix; // matrix, will be randomly init'ed by init() on program start
 
 const rSurvive = [3, 4, 5];
 const rBirth = [2, 4];
-const rStates = 20;
+const rStates = 25;
 
 // by mjackson on github, slightyl modified by me
 function hsvToRgb(h, s, v) { // exactly what it sounds like
@@ -50,7 +57,7 @@ function hsvToRgb(h, s, v) { // exactly what it sounds like
 const colors = ["#000000"];
 
 for (let i = 1; i <= (rStates - 1); i++) {
-    colors.push(hsvToRgb(i / (rStates - 1), 0.69, 0.84))
+    colors.push(hsvToRgb(i / (rStates - 1), 0.55, 0.9))
 }
 
 function drawRect(cind, x, y) { // draw rect with cind color from colors array and at grid (x, y)
@@ -63,19 +70,25 @@ function drawRect(cind, x, y) { // draw rect with cind color from colors array a
     );
 }
 
-function click(e) { // click listener
-    var x = e.pageX - e.currentTarget.offsetLeft; 
-    var y = e.pageY - e.currentTarget.offsetTop;
-    var gridx = Math.round((x - (sqWidth / 2)) / sqWidth);
-    var gridy = Math.round((y - (sqWidth / 2)) / sqWidth);
+function drawOutlineRect(color, x, y) { // draw rect outline rect with color color at (x, y)
+    ctx.strokeStyle = color;
+    ctx.strokeRect( 
+        x * sqWidth,
+        y * sqWidth,
+        sqWidth,
+        sqWidth
+    );
+}
+
+function mousedown(e) { // click listener
+    // console.log(gridx, gridy);
+    // console.log(matrixGet(gridy, gridx));
+    // console.log(neighbors(gridy, gridx));
     
-    console.log(gridx, gridy);
-    console.log(matrixGet(gridy, gridx));
-    console.log(neighbors(gridy, gridx));
+    // matrix[gridy][gridx] = rStates - 1;
+    processing.push([mousex, mousey]);
     
-    //createCanvasGrid();
-    //drawRect(1, gridx, gridy);
-    //drawLines()
+    render();
 }
 
 function createCanvasGrid() { // init canvas with no lines, just a rect
@@ -111,28 +124,32 @@ function drawLines() { // draw griddy lines
 function render() { // render the frame by drawing squares
     createCanvasGrid();
     
-    for (let row = 0; row < matrix.length; row++) {
+    for (let row = 0; row < matrix.length; row++) { // render every square from matrix
         for (let col = 0; col < matrix[row].length; col++) {
             drawRect(matrix[row][col], col, row);
         }
     }
     
     drawLines();
+    
+    for (let i = 0; i < processing.length; i++) { // render every outline in current stroke
+        drawOutlineRect(grid_opts.outlinecolor, processing[i][0], processing[i][1]);
+    }
 }
 
-function matrixGet(row, col) {
-    var row = matrix[row];
+function matrixGet(row, col) { // get state at position (yes it's a one line func I'm lazy ight)
+    let mrow = matrix[row];
     
-    if (row == undefined) {
+    if (mrow === undefined) {
         return 0;
     }
     
-    var val = row[col];
+    let val = mrow[col];
     
-    return (val == undefined) ? 0 : val
+    return (val !== undefined) ? val : 0;
 }
 
-function count(arr, cond) {
+function count(arr, cond) { // count occurences in arr that return true when passed into cond()
     return Array.from(
         arr,
         (elem) => (cond(elem) ? 1 : 0)
@@ -142,7 +159,7 @@ function count(arr, cond) {
     );
 }
 
-function neighbors(row, col) {
+function neighbors(row, col) { // return list of states of neighbours
     return [
         matrixGet(row - 1, col - 1),
         matrixGet(row, col - 1),
@@ -189,6 +206,13 @@ function tick() { // every tick/frame
     render();
 }
 
+function onmousemove(e) { // take event thingy and get relative mouse position to canvas
+    let x = e.pageX - e.currentTarget.offsetLeft; 
+    let y = e.pageY - e.currentTarget.offsetTop;
+    mousex = Math.round((x - (sqWidth / 2)) / sqWidth);
+    mousey = Math.round((y - (sqWidth / 2)) / sqWidth);
+}
+
 function init() { // init!
     matrix = Array.from({length:sqRows}, function () {
         row = new Array(sqCols)
@@ -200,13 +224,14 @@ function init() { // init!
         return row;
     });
     
-    // tick();
-    
     render();
     
-    setInterval(tick, (1000 / framerate));
+    setInterval(tick, (1000 / tick_framerate));
+    // setInterval(mousecheck, (1000 / mouse_framerate));
     
-    canvas.addEventListener("click", click);
+    canvas.addEventListener("mousedown", mousedown);
+    
+    canvas.onmousemove = onmousemove;
 }
 
 init();
