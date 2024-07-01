@@ -5,6 +5,7 @@ const sqCols = 75;
 const sqRows = 50;
 const weight = 1;
 var sqWidth = Math.floor(Math.min(((cW) / sqCols), ((cH) / sqRows)));
+const framerate = 30;
 
 const canvas = document.getElementById("main_canvas");
 const ctx = canvas.getContext("2d");
@@ -161,7 +162,7 @@ function tick() { // every tick/frame
         for (let col = 0; col < matrix[row].length; col++) {
             let state = matrix[row][col];
             let cur_n = neighbors(row, col); // list of neighbor rStates
-            let cur_c = count(cur_n, (elem) => (elem > 0)); // count of neighbors alive or dying state
+            let cur_c = count(cur_n, (elem) => (elem == (rStates - 1))); // count of neighbors alive or dying state
             let changed = false;
             
             // state 0 = dead, state <rStates - 1> = alive, state 1 - <rStates - 1> is decreasing amounts of dying
@@ -203,7 +204,7 @@ function init() { // init!
     
     render();
     
-    setInterval(tick, 500);
+    setInterval(tick, (1000 / framerate));
     
     canvas.addEventListener("click", click);
 }
