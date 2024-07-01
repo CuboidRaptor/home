@@ -162,22 +162,27 @@ function tick() { // every tick/frame
             let cur_c1 = count(cur_n, state + 1); // count of neighbors with next state
             let changed = false;
             
-            if (state > 0) {
-                if (!rSurvive.includes(cur_c)) {
-                    newMatrix[row][col] = state - 1;
-                    changed = true;
-                }
-            }
-            
-            if (state < states) {
+            if (state == 0) {
                 if (rBirth.includes(cur_c1)) {
-                    newMatrix[row][col] = state + 1;
-                    changed = true;
+                    newMatrix[row][col] = 1;
                 }
             }
-            
-            if (!changed) {
-                newMatrix[row][col] = state;
+            else if (state < states) {
+                let shouldSurvive = rSurvive.includes(cur_c);
+                
+                if ((state == 1) && (shouldSurvive)) {
+                    newMatrix[row][col] = state;
+                }
+                else if (!shouhldSurvive) {
+                    newMatrix[row][col] = (state + 1) % rStates;
+                }
+                
+                if (state > 1) {
+                    newMatrix[row][col] = state + 1;
+                }
+            }
+            else if (state >= states) {
+                newMatrix[row][col] = 0;
             }
         }
     }
@@ -202,7 +207,7 @@ function init() { // init!
     
     render();
     
-    setInterval(tick, 1000);
+    setInterval(tick, 500);
     
     canvas.addEventListener("click", click);
 }
