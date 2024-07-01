@@ -1,3 +1,5 @@
+// automaton rule is modified Bombers by Mirek Wojtowicz.
+
 // consts because I want this to work for differnt viewportsspeplling is hard shut up
 const cW = document.documentElement.clientWidth;
 const cH = document.documentElement.clientHeight;
@@ -6,6 +8,7 @@ const sqRows = 75;
 const weight = 2;
 var sqWidth = Math.floor(Math.min(((cW) / sqCols), ((cH) / sqRows)));
 const tick_framerate = 30;
+const mouse_framerate = 120;
 const outlinecolor = "#fefeff";
 
 var plmx = 0; // precision last mouse x
@@ -29,7 +32,7 @@ const grid_opts = { // griddy
     height      : sqWidth * sqRows,
     weight      : weight,
     background  : "#000000",
-    color       : "#9898a8"
+    color       : "#686878"
 };
 
 var matrix; // matrix, will be randomly init'ed by init() on program start
@@ -227,7 +230,12 @@ function tick() { // every tick/frame
     render();
 }
 
-function onmousemove(e) { // take event thingy and get relative mouse position to canvas
+function mousemove(e) { // take event thingy and get relative mouse position to canvas
+    if (e.timeStamp - this.pointerTimestamp < 1000/30) {
+        return
+    }
+    this.pointerTimestamp = e.timeStamp
+    
     let x = e.pageX - e.currentTarget.offsetLeft; 
     let y = e.pageY - e.currentTarget.offsetTop;
     mousex = Math.round((x - (sqWidth / 2)) / sqWidth);
@@ -279,7 +287,7 @@ function init() { // init!
     
     canvas.addEventListener("mousedown", mousedown);
     canvas.addEventListener("mouseup", mouseup);
-    canvas.addEventListener("mousemove", onmousemove);
+    canvas.addEventListener("mousemove", mousemove);
 }
 
 init();
