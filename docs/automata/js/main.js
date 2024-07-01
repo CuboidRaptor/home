@@ -39,7 +39,7 @@ var matrix; // matrix, will be randomly init'ed by init() on program start
 
 const rSurvive = [3, 4, 5];
 const rBirth = [2, 4];
-const rStates = 25;
+const rStates = 15;
 
 // by mjackson on github, slightyl modified by me
 function hsvToRgb(h, s, v) { // exactly what it sounds like
