@@ -5,13 +5,20 @@ const sqCols = 100;
 const sqRows = 75;
 const weight = 2;
 var sqWidth = Math.floor(Math.min(((cW) / sqCols), ((cH) / sqRows)));
-const tick_framerate = 2;
-const mouse_framerate = 60;
+const tick_framerate = 30;
+const outlinecolor = "#fefeff";
+
+var plmx = 0; // precision last mouse x
+var plmy = 0;
 var lastmousex = 0;
 var lastmousey = 0 ;
 var mousex = 0;
 var mousey = 0;
-var processing = [];
+var processing = new Set();
+var mousedownstate = false;
+var mousejustup = false;
+
+const bresenhamWorker = new Worker("js/bresenham.js");
 
 const canvas = document.getElementById("main_canvas");
 const ctx = canvas.getContext("2d");
@@ -22,8 +29,7 @@ const grid_opts = { // griddy
     height      : sqWidth * sqRows,
     weight      : weight,
     background  : "#000000",
-    color       : "#b8b8c8",
-    outlinecolor: "#fefeff"
+    color       : "#9898a8"
 };
 
 var matrix; // matrix, will be randomly init'ed by init() on program start
@@ -80,15 +86,22 @@ function drawOutlineRect(color, x, y) { // draw rect outline rect with color col
     );
 }
 
-function mousedown(e) { // click listener
+function mousedown(e) { // mosue go up
     // console.log(gridx, gridy);
     // console.log(matrixGet(gridy, gridx));
     // console.log(neighbors(gridy, gridx));
     
     // matrix[gridy][gridx] = rStates - 1;
-    processing.push([mousex, mousey]);
+    processing.add([mousex, mousey]);
+    
+    mousedownstate = true;
     
     render();
+}
+
+function mouseup(e) { // mouse go down
+    mousedownstate = false;
+    mousejustup = true; // turning stroke into alive cells gets moved into end of tick() because I'm paranoid of race conditions
 }
 
 function createCanvasGrid() { // init canvas with no lines, just a rect
@@ -132,9 +145,9 @@ function render() { // render the frame by drawing squares
     
     drawLines();
     
-    for (let i = 0; i < processing.length; i++) { // render every outline in current stroke
-        drawOutlineRect(grid_opts.outlinecolor, processing[i][0], processing[i][1]);
-    }
+    processing.forEach(function(sq) {
+        drawOutlineRect(outlinecolor, sq[0], sq[1]);
+    });
 }
 
 function matrixGet(row, col) { // get state at position (yes it's a one line func I'm lazy ight)
@@ -203,6 +216,14 @@ function tick() { // every tick/frame
     
     matrix = newMatrix;
     
+    if (mousejustup) {
+        processing.forEach(function(sq) {
+            matrix[sq[1]][sq[0]] = rStates - 1;
+        });
+        processing = new Set();
+        mousejustup = false;
+    }
+    
     render();
 }
 
@@ -211,6 +232,33 @@ function onmousemove(e) { // take event thingy and get relative mouse position t
     let y = e.pageY - e.currentTarget.offsetTop;
     mousex = Math.round((x - (sqWidth / 2)) / sqWidth);
     mousey = Math.round((y - (sqWidth / 2)) / sqWidth);
+    
+    if (((mousex !== lastmousex) || (mousey !== lastmousey)) && mousedownstate) {
+        processing.add([mousex, mousey]); // outline
+        
+        // bresenham's line algorithm to interpolate/monkeypatch browser's terrible sampling rate
+        
+        bresenhamWorker.postMessage([mousex, mousey, lastmousex, lastmousey]);
+    }
+        
+    lastmousex = mousex;
+    lastmousey = mousey;
+    plmx = x;
+    plmy = y;
+}
+
+bresenhamWorker.onmessage = (e) => {
+    processing = new Set([...processing, ...e.data]);
+    render();
+    
+    setTimeout(
+        function() { // check if mousedown and not cleared in 150ms (a.k.a lag go brrrr), then render and clear
+            if ((processing != new Set()) && (!mousedownstate)) {
+                mousejustup = true;
+            }
+        },
+        150
+    )
 }
 
 function init() { // init!
@@ -230,8 +278,8 @@ function init() { // init!
     // setInterval(mousecheck, (1000 / mouse_framerate));
     
     canvas.addEventListener("mousedown", mousedown);
-    
-    canvas.onmousemove = onmousemove;
+    canvas.addEventListener("mouseup", mouseup);
+    canvas.addEventListener("mousemove", onmousemove);
 }
 
 init();
