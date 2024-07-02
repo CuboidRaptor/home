@@ -1,12 +1,12 @@
 // automaton rule is modified Bombers by Mirek Wojtowicz.
 
 // consts because I want this to work for differnt viewportsspeplling is hard shut up
-const cW = document.documentElement.clientWidth;
-const cH = document.documentElement.clientHeight;
+var cW;
+var cH;
 const sqCols = 100;
 const sqRows = 75;
 const weight = 2;
-var sqWidth = Math.floor(Math.min(((cW) / sqCols), ((cH) / sqRows)));
+var sqWidth;
 const tick_framerate = 30;
 const maxmousepollrate = 60;
 const outlinecolor = "#fefeff";
@@ -22,10 +22,11 @@ var mousedownstate = false;
 var mousejustup = false;
 
 const bresenhamWorker = new Worker("js/bresenham.js");
+const gamediv = document.getElementById("game");
 
 const canvas = document.getElementById("main_canvas");
 const ctx = canvas.getContext("2d");
-const grid_opts = { // griddy
+var grid_opts = { // griddy
     cols        : sqCols,
     rows        : sqRows,
     width       : sqWidth * sqCols,
@@ -67,6 +68,18 @@ const colors = ["#000000"];
 
 for (let i = 1; i <= (rStates - 1); i++) {
     colors.push(hsvToRgb(i / (rStates - 1), 0.55, 0.9))
+}
+
+function resize() {
+    cW = document.documentElement.clientWidth;
+    cH = document.documentElement.clientHeight;
+    sqWidth = Math.floor(Math.min(((cW) / sqCols), ((cH * 0.9) / sqRows))); // resize the game dynamically
+    maxSqWidth = Math.floor(Math.min(((cW) / sqCols), ((cH) / sqRows)));
+    grid_opts.width = sqWidth * sqCols;
+    grid_opts.height = sqWidth * sqRows;
+    
+    gamediv.style.width = (maxSqWidth * sqCols).toString() + "px";
+    gamediv.style.height = (maxSqWidth * sqRows).toString() + "px";
 }
 
 function drawRect(cind, x, y) { // draw rect with cind color from colors array and at grid (x, y)
@@ -219,7 +232,7 @@ function tick() { // every tick/frame
     
     matrix = newMatrix;
     
-    if (mousejustup) {
+    if (mousejustup) { // add in stroked alive cells
         processing.forEach(function(sq) {
             matrix[sq[1]][sq[0]] = rStates - 1;
         });
@@ -227,6 +240,7 @@ function tick() { // every tick/frame
         mousejustup = false;
     }
     
+    resize();
     render();
 }
 
@@ -270,6 +284,7 @@ bresenhamWorker.onmessage = (e) => {
 }
 
 function init() { // init!
+    /* random initialisation for testing
     matrix = Array.from({length:sqRows}, function () {
         row = new Array(sqCols)
         
@@ -279,6 +294,9 @@ function init() { // init!
         
         return row;
     });
+    */
+    resize();
+    matrix = Array.from(new Array(sqRows), (elem) => (new Array(sqCols)).fill(0));
     
     render();
     

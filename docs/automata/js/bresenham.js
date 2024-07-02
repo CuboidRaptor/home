@@ -1,3 +1,4 @@
+// this worker uses bresenham's line algorithm to concurrently smooth the browser's terrible mousemove polling rate
 onmessage = (e) => {
     let outputset = new Set();
     

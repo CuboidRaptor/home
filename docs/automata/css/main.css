@@ -1,9 +1,10 @@
 body {
     margin: 0;
     padding: 0;
+    background-color: black;
 }
  
-canvas { 
+#game { 
     padding: 0; /* general addendums */
     margin: auto;
     display: block;  /* horz centre */
@@ -12,4 +13,10 @@ canvas {
     bottom: 0;
     left: 0;
     right: 0;
+}
+
+#rectangle{
+    width:200px;
+    height:100px;
+    background:blue;
 }
