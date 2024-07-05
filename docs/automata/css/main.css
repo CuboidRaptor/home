@@ -4,19 +4,25 @@ body {
     background-color: black;
 }
  
-#game { 
-    padding: 0; /* general addendums */
-    margin: auto;
-    display: block;  /* horz centre */
-    position: absolute;  /* vert centre */
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+#game {
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%); /* IE 9 */
+    -webkit-transform: translate(-50%, -50%); /* Chrome, Safari, Opera */	
+}
+
+#main_canvas {
+    margin: 0 auto;
+    border: 0px;
+    padding: 0px;
 }
 
 #rectangle{
-    width:200px;
-    height:100px;
-    background:blue;
+    background: blue;
+    margin: 0 auto;
+    border: 0px;
+    padding: 0px;
 }

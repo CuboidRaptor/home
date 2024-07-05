@@ -10,6 +10,8 @@ var sqWidth;
 const tick_framerate = 30;
 const maxmousepollrate = 60;
 const outlinecolor = "#fefeff";
+const gamemargin = 10;
+const hudheight = 150;
 
 var plmx = 0; // precision last mouse x
 var plmy = 0;
@@ -22,7 +24,10 @@ var mousedownstate = false;
 var mousejustup = false;
 
 const bresenhamWorker = new Worker("js/bresenham.js");
+
 const gamediv = document.getElementById("game");
+const windowdiv = document.getElementById("window");
+const rectanglediv = document.getElementById("rectangle");
 
 const canvas = document.getElementById("main_canvas");
 const ctx = canvas.getContext("2d");
@@ -70,16 +75,24 @@ for (let i = 1; i <= (rStates - 1); i++) {
     colors.push(hsvToRgb(i / (rStates - 1), 0.55, 0.9))
 }
 
+rectanglediv.style.height = hudheight;
+
 function resize() {
     cW = document.documentElement.clientWidth;
     cH = document.documentElement.clientHeight;
-    sqWidth = Math.floor(Math.min(((cW) / sqCols), ((cH * 0.9) / sqRows))); // resize the game dynamically
-    maxSqWidth = Math.floor(Math.min(((cW) / sqCols), ((cH) / sqRows)));
+    sqWidth = Math.floor(
+        Math.min(
+            ((cW - (2 * gamemargin)) / sqCols),
+            (((cH - (2 * gamemargin)) * 0.9) / sqRows)
+        )
+    ); // resize the game dynamically
     grid_opts.width = sqWidth * sqCols;
     grid_opts.height = sqWidth * sqRows;
     
-    gamediv.style.width = (maxSqWidth * sqCols).toString() + "px";
-    gamediv.style.height = (maxSqWidth * sqRows).toString() + "px";
+    gamediv.style.width = (sqWidth * sqCols).toString() + "px";
+    gamediv.style.height = (sqWidth * sqRows + 150 + 5).toString() + "px"; // the 5px is for some goofy ahhh css margin that i'm too lazy to remove
+    
+    rectanglediv.style.width = (sqWidth * sqCols).toString() + "px";
 }
 
 function drawRect(cind, x, y) { // draw rect with cind color from colors array and at grid (x, y)
@@ -250,8 +263,13 @@ function mousemove(e) { // take event thingy and get relative mouse position to 
     }
     this.pointerTimestamp = e.timeStamp
     
-    let x = e.pageX - e.currentTarget.offsetLeft; 
-    let y = e.pageY - e.currentTarget.offsetTop;
+    let rect = canvas.getBoundingClientRect(),
+    scaleX = canvas.width / rect.width,    // relationship bitmap vs. element for x
+    scaleY = canvas.height / rect.height;  // relationship bitmap vs. element for y
+
+    let x = (e.clientX - rect.left) * scaleX;   // scale mouse coordinates after they have been adjusted to be relative to element
+    let y = (e.clientY - rect.top) * scaleY;
+    
     mousex = Math.round((x - (sqWidth / 2)) / sqWidth);
     mousey = Math.round((y - (sqWidth / 2)) / sqWidth);
     
