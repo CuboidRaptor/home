@@ -29,5 +29,9 @@
 /* error message <p> formatting */
 #err {
     font-family: "SalmaPro", "sans-serif";
-    color: #e01e4e;
+    color: #ff2952;
+}
+
+#err.fade-transition {
+    transition: opacity 1s;
 }

@@ -30,11 +30,24 @@ const form = document.getElementById("sbar-form");
 // error message tag
 const err_p = document.getElementById("err");
 
+// make message fade and reset after a bit
 function fade_error(msg) {
     if (err_p.innerHTML === msg) {
-        err_p.innerHTML = "";
+        err_p.style.opacity = "0";
     }
 }
+
+// reset opacity, innerhtml, blah blah blah of error <p> tag
+function reset() {
+    err_p.innerHTML = "";
+    err_p.classList.remove("fade-transition");
+    err_p.style.opacity = "1";
+    err_p.offsetHeight; // listen I know this looks cursed but it triggers a reflow otherwise this still animates
+    err_p.classList.add("fade-transition");
+}
+
+// set listener to empty when done fading
+err_p.addEventListener("transitionend", reset);
 
 // when enter is pressed
 function searched(event) {
@@ -55,6 +68,7 @@ function searched(event) {
     }
     catch (e) {
         let emsg = String(e.message);
+        reset();
         err_p.innerHTML = emsg;
         setTimeout(() => (fade_error(emsg)), 5000);
         throw e;
