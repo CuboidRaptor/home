@@ -63,7 +63,6 @@ function searched(event) {
             window.open(url, "_self");
         }
         else {
-            throw Error;
         }
     }
     catch (e) {
