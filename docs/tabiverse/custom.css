@@ -1,0 +1,33 @@
+/* funni font for searchbar */
+@font-face {
+    font-family: "SalmaPro";
+    src: url("./assets/fonts/SalmaproMedium-yw9ad.otf");
+}
+
+/* container (absolute positioning, positioning in general, margins, blah blah blah) */
+.sbar-container {
+    position: absolute;
+    text-align: center;
+
+    width: 100vw;
+    height: 40px;
+
+    top: 20px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* search formatting */
+#search {
+    font-family: "SalmaPro", "sans-serif";
+    width: 0px;
+    height: 22px;
+}
+
+/* error message <p> formatting */
+#err {
+    font-family: "SalmaPro", "sans-serif";
+    color: #e01e4e;
+}

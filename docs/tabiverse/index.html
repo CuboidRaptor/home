@@ -5,11 +5,20 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
         <link href="/assets/fonts/custom-fonts.css" rel="stylesheet">
+        <link href="modern-normalize.css" rel="stylesheet">
         <link href="bundle.css" rel="stylesheet">
+        <link href="custom.css" rel="stylesheet">
     </head>
     <body>
+        <div class="sbar-container">
+            <form class="sbar-form" id="sbar-form">
+                <input id="search" type="text" class="search" placeholder="Search with Google or enter address" />
+            </form>
+            <p id="err"></p>
+        </div>
         <div id="app"></div>
         <canvas id="canvas"></canvas>
         <script src="index.min.js"></script>
+        <script src="searchbar_custom.js"></script>
     </body>
 </html>
