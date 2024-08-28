@@ -55,6 +55,13 @@ err_p.addEventListener("transitionend", reset);
 const drive_re = /^[a-z]:.*/i;
 const domain_re = /^([a-z\-]+\.)+([a-z\-]+)\/(.*)/i;
 
+const default_engine = [":g", "Google", "https://www.google.com/search?q="];
+const engines = [
+    [":g", "Google", "https://www.google.com/search?q="],
+    [":yt", "YouTube", "https://www.youtube.com/results?search_query="],
+    [":d", "DuckDuckGo", "https://duckduckgo.com/?q="]
+];
+
 // when enter is pressed
 function searched(event) {
     event.preventDefault();
@@ -62,6 +69,10 @@ function searched(event) {
         let string = search_input.value.trimEnd();
         let original_string = string;
         let urlToOpen = null;
+
+        if (string === "[DEBUG]: error.throw();") {
+            throw new Error("Debug error triggered in omnibox");
+        }
 
         // strip protocol so we can apply a regex to determine url/google search
         if (string.startsWith("http:")) {
@@ -81,11 +92,22 @@ function searched(event) {
                 urlToOpen = "http://" + string;
             }
             else {
-                urlToOpen = "https://www.google.com/search?q=" + original_string;
+                urlToOpen = default_engine[2] + original_string;
             }
         }
         else {
-            urlToOpen = "https://www.google.com/search?q=" + original_string;
+            let search_string = default_engine[2];
+            let content_string = original_string;
+
+            for (let engine of engines) {
+                if (original_string.startsWith(engine[0] + " ")) {
+                    search_string = engine[2];
+                    content_string = content_string.slice(engine[0].length + 1);
+                    break;
+                }
+            }
+
+            urlToOpen = search_string + content_string;
         }
 
         console.log("urlToOpen:");

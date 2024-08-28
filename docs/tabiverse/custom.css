@@ -12,11 +12,15 @@
     width: 100vw;
     height: 40px;
 
-    top: 20px;
+    top: 0px;
     left: 0;
     right: 0;
     margin-left: auto;
     margin-right: auto;
+}
+
+#sbar-form {
+    margin-top: 20px;
 }
 
 /* search formatting */
