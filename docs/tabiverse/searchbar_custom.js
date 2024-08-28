@@ -52,7 +52,6 @@ function reset() {
 err_p.addEventListener("transitionend", reset);
 
 // regexes for searched()
-const drive_re = /^[a-z]:.*/i;
 const domain_re = /^(?:[a-z\-]+\.)+([a-z\-]+)\/.*/i;
 
 const default_engine = [":g", "Google", "https://www.google.com/search?q="];
