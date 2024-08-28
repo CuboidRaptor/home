@@ -5,28 +5,23 @@
 }
 
 /* container (absolute positioning, positioning in general, margins, blah blah blah) */
-.sbar-container {
+#sbar-container {
     position: absolute;
     text-align: center;
 
-    width: 100vw;
+    width: 0vw;
     height: 40px;
 
     top: 0px;
     left: 0;
     right: 0;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#sbar-form {
-    margin-top: 16px;
+    margin-inline: auto;
 }
 
 /* search formatting */
 #search {
     font-family: "SalmaPro", "sans-serif";
-    width: 0px;
+    width: 100%;
     height: 30px;
 }
 
@@ -38,4 +33,9 @@
 
 #err.fade-transition {
     transition: opacity 1s;
+}
+
+#engine-display {
+    font-family: "SalmaPro", "sans-serif";
+    font-size: 16px;
 }

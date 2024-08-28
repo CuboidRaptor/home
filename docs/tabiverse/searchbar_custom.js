@@ -12,14 +12,15 @@ fetch(tlds_url)
 
 // the search <input>
 const search_input = document.getElementById("search");
+const container = document.getElementById("sbar-container");
 
 // focus search bar
 search_input.focus();
 
-// resize searchbar to maximum width - 256 (for spacing of other icon) or 1000, whichever is smaller
+// resize searchbar to maximum width - 256 (for spacing of other icon) or 1200, whichever is smaller
 function searchbar_resize(event) {
-    let barsize = Math.min(document.documentElement.clientWidth - 256, 1000)
-    search_input.style.width = `${barsize}px`;
+    let barsize = Math.min(document.documentElement.clientWidth - 256, 1200)
+    container.style.width = `${barsize}px`;
 }
 
 // resize initially, and then add listener
@@ -28,6 +29,7 @@ window.addEventListener("resize", searchbar_resize);
 
 // get <form> element
 const form = document.getElementById("sbar-form");
+const engine_display = document.getElementById("engine-display");
 
 // error message tag
 const err_p = document.getElementById("err");
@@ -39,7 +41,7 @@ function fade_error(msg) {
     }
 }
 
-// reset opacity, innerhtml, blah blah blah of error <p> tag
+// reset opacity, innerhtml, blah blah blah of error <p> tag (after fadeout finishes)
 function reset() {
     err_p.innerHTML = "";
     err_p.classList.remove("fade-transition");
@@ -87,25 +89,25 @@ function searched(event) {
         else if (string.startsWith("https:")) {
             string = string.slice(6).match(/\/*(.+)/)[1];
         }
-        let slashed_string = string.endsWith("/") ? string : (string + "/");
+        let slashed_string = string.endsWith("/") ? string : (string + "/"); // add a slash to the end if not present
 
         let re_match = slashed_string.match(domain_re);
 
-        if (re_match !== null) {
+        if (re_match !== null) { // matches url regex
             let tld = re_match[1];
 
-            if (tlds.includes(tld.toUpperCase())) {
+            if (tlds.includes(tld.toUpperCase())) { // valid tld, http open it (hsts + https everywhere should make this safe)
                 urlToOpen = "http://" + string;
             }
-            else {
+            else { // invalid tld, send to default search
                 urlToOpen = default_engine[2] + original_string;
             }
         }
-        else {
+        else { // not url, send to default search
             let search_string = default_engine[2];
             let content_string = original_string;
 
-            for (let engine of engines) {
+            for (let engine of engines) { // check if any search engines enabled
                 if (original_string.startsWith(engine[0] + " ")) {
                     search_string = engine[2];
                     content_string = content_string.slice(engine[0].length + 1);
@@ -118,14 +120,14 @@ function searched(event) {
 
         console.log("urlToOpen:");
         console.log(urlToOpen);
-        if (urlToOpen !== null) {
+        if (urlToOpen !== null) { // open!!!
             window.open(urlToOpen, "_self", "noreferrer=true");
         }
-        else {
+        else { // something borked
             throw new Error("urlToOpen is null/undefined");
         }
     }
-    catch (e) {
+    catch (e) { // deal with errors + display them
         let emsg = String(e.message);
         reset();
         err_p.innerHTML = emsg;
@@ -135,5 +137,24 @@ function searched(event) {
     
 } 
 
+function oninput(event) {
+    console.log(search_input.value);
+    let found = false;
+    for (let engine of engines) { // check if any search engines enabled
+        if (search_input.value.startsWith(engine[0] + " ")) {
+            engine_display.innerHTML = engine[1];
+            found = true;
+            break;
+        }
+    }
+
+    if (!found) {
+        engine_display.innerHTML = "<br>";
+    }
+}
+
 // add listener
 form.addEventListener("submit", searched);
+search_input.addEventListener("input", oninput);
+
+search_input.placeholder = `Search with ${default_engine[1]} or enter address`;
