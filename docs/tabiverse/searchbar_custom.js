@@ -54,28 +54,28 @@ err_p.addEventListener("transitionend", reset);
 // regexes for searched()
 const drive_re = /^[a-z]:.*/i;
 const domain_re = /^([a-z\-]+\.)+([a-z\-]+)\/(.*)/i;
-const protocol_domain_re = /^(http(s)?):\/{2,}([a-z\-]+\.)+([a-z\-]+)\/(.*)/i;
 
 // when enter is pressed
 function searched(event) {
     event.preventDefault();
-    let string = search_input.value.trimEnd();
-    let slashed_string = string.endsWith("/") ? string : (string + "/");
-    
     try {
+        let string = search_input.value.trimEnd();
+        let original_string = string;
         let urlToOpen = null;
-        if ( // http/https/file
-            (string.startsWith("http:") || string.startsWith("https:"))
-            && (protocol_domain_re.test(slashed_string))) {
-            urlToOpen = string;
+
+        if (string.startsWith("http:")) {
+            string = string.slice(5).match(/\/*(.+)/)[1];
+        }
+        else if (string.startsWith("https:")) {
+            string = string.slice(6).match(/\/*(.+)/)[1];
+        }
+        let slashed_string = string.endsWith("/") ? string : (string + "/");
+
+        if (domain_re.test(slashed_string)) {
+            urlToOpen = "http://" + string;
         }
         else {
-            if (domain_re.test(slashed_string)) {
-                urlToOpen = "http://" + string;
-            }
-            else {
-                urlToOpen = "https://www.google.com/search?q=" + string;
-            }
+            urlToOpen = "https://www.google.com/search?q=" + original_string;
         }
 
         if (urlToOpen !== null) {
