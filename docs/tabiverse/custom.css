@@ -20,14 +20,14 @@
 }
 
 #sbar-form {
-    margin-top: 20px;
+    margin-top: 16px;
 }
 
 /* search formatting */
 #search {
     font-family: "SalmaPro", "sans-serif";
     width: 0px;
-    height: 22px;
+    height: 30px;
 }
 
 /* error message <p> formatting */
