@@ -157,4 +157,5 @@ function oninput(event) {
 form.addEventListener("submit", searched);
 search_input.addEventListener("input", oninput);
 
+// set placecholder correctly with default engine
 search_input.placeholder = `Search with ${default_engine[1]} or enter address`;
