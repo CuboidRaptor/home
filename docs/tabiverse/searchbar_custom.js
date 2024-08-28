@@ -53,7 +53,7 @@ err_p.addEventListener("transitionend", reset);
 
 // regexes for searched()
 const drive_re = /^[a-z]:.*/i;
-const domain_re = /^([a-z\-]+\.)+([a-z\-]+)\/(.*)/i;
+const domain_re = /^(?:[a-z\-]+\.)+([a-z\-]+)\/.*/i;
 
 const default_engine = [":g", "Google", "https://www.google.com/search?q="];
 const engines = [
@@ -93,7 +93,7 @@ function searched(event) {
         let re_match = slashed_string.match(domain_re);
 
         if (re_match !== null) {
-            let tld = re_match[re_match.length - 2];
+            let tld = re_match[1];
 
             if (tlds.includes(tld.toUpperCase())) {
                 urlToOpen = "http://" + string;
