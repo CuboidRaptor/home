@@ -54,27 +54,22 @@ err_p.addEventListener("transitionend", reset);
 // regexes for searched()
 const drive_re = /^[a-z]:.*/i;
 const domain_re = /^([a-z\-]+\.)+([a-z\-]+)\/(.*)/i;
+const protocol_domain_re = /^(http(s)?):\/{2,}([a-z\-]+\.)+([a-z\-]+)\/(.*)/i;
 
 // when enter is pressed
 function searched(event) {
     event.preventDefault();
     let string = search_input.value.trimEnd();
+    let slashed_string = string.endsWith("/") ? string : (string + "/");
     
     try {
         let urlToOpen = null;
         if ( // http/https/file
-            string.startsWith("http:")
-            || string.startsWith("https:")
-            || string.startsWith("file:")) {
+            (string.startsWith("http:") || string.startsWith("https:"))
+            && (protocol_domain_re.test(slashed_string))) {
             urlToOpen = string;
         }
-        else if ( // C: or / starting files indicating file:// paths on their respective operating systems
-            (drive_re.test(string) && window.navigator.platform.startsWith("Win")) // windows
-            || (string.startsWith("/") && (!window.navigator.platform.startsWith("Win")))) {
-            urlToOpen = "file://" + string;
-        }
         else {
-            let slashed_string = string.endsWith("/") ? string : (string + "/");
             if (domain_re.test(slashed_string)) {
                 urlToOpen = "http://" + string;
             }
