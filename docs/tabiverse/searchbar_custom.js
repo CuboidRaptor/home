@@ -63,6 +63,7 @@ function searched(event) {
         let original_string = string;
         let urlToOpen = null;
 
+        // strip protocol so we can apply a regex to determine url/google search
         if (string.startsWith("http:")) {
             string = string.slice(5).match(/\/*(.+)/)[1];
         }
@@ -74,11 +75,8 @@ function searched(event) {
         let re_match = slashed_string.match(domain_re);
 
         if (re_match !== null) {
-            console.log(re_match)
             let tld = re_match[re_match.length - 2];
 
-            console.log(tlds);
-            console.log(tld);
             if (tlds.includes(tld.toUpperCase())) {
                 urlToOpen = "http://" + string;
             }
