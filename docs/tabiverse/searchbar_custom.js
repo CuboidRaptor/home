@@ -59,7 +59,14 @@ const default_engine = [":g", "Google", "https://www.google.com/search?q="];
 const engines = [
     [":g", "Google", "https://www.google.com/search?q="],
     [":yt", "YouTube", "https://www.youtube.com/results?search_query="],
-    [":d", "DuckDuckGo", "https://duckduckgo.com/?q="]
+    [":d", "DuckDuckGo", "https://duckduckgo.com/?q="],
+    [":e", "Ecosia", "https://www.ecosia.org/search?q="],
+    [":s", "Startpage", "https://www.startpage.com/do/search?query="],
+    [":amzn", "Amazon", "https://www.amazon.ca/s?k="],
+    [":b", "Bing", "https://www.bing.com/search?q="],
+    [":br", "Brave Search", "https://search.brave.com/search?q="],
+    [":mo", "Mojeek", "https://www.mojeek.com/search?q="],
+    [":m", "MuseScore", "https://musescore.com/sheetmusic?text="]
 ];
 
 // when enter is pressed
