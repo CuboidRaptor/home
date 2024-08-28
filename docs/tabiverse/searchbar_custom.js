@@ -1,3 +1,5 @@
+"use strict";
+
 // get list of TLDs from IANA website thing
 const tlds_url = "https://data.iana.org/TLD/tlds-alpha-by-domain.txt";
 let tlds = [];
@@ -49,18 +51,17 @@ function reset() {
 // set listener to empty when done fading
 err_p.addEventListener("transitionend", reset);
 
-const drive_re = /^[a-z]:.*/i;
-
 // regexes for searched()
-const domain_re = /^(([a-z\-]+)\.)+([a-z\-]+)\//i;
+const drive_re = /^[a-z]:.*/i;
+const domain_re = /^([a-z\-]+\.)+([a-z\-]+)\/(.*)/i;
 
 // when enter is pressed
 function searched(event) {
     event.preventDefault();
-    let string = search_input.value;
+    let string = search_input.value.trimEnd();
     
     try {
-        let urlToOpen;
+        let urlToOpen = null;
         if ( // http/https/file
             string.startsWith("http:")
             || string.startsWith("https:")
@@ -82,11 +83,11 @@ function searched(event) {
             }
         }
 
-        if (urlToOpen !== undefined) {
+        if (urlToOpen !== null) {
             window.open(urlToOpen, "_self", "noreferrer=true");
         }
         else {
-            throw new Error("urlToOpen is not defined")
+            throw new Error("urlToOpen is null/undefined")
         }
     }
     catch (e) {
