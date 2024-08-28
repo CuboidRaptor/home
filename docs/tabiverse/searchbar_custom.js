@@ -159,3 +159,7 @@ search_input.addEventListener("input", oninput);
 
 // set placecholder correctly with default engine
 search_input.placeholder = `Search with ${default_engine[1]} or enter address`;
+
+var script = document.createElement("script");
+script.src = "index.min.js";
+document.head.appendChild(script);
