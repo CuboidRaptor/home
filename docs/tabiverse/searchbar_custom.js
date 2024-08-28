@@ -71,18 +71,32 @@ function searched(event) {
         }
         let slashed_string = string.endsWith("/") ? string : (string + "/");
 
-        if (domain_re.test(slashed_string)) {
-            urlToOpen = "http://" + string;
+        let re_match = slashed_string.match(domain_re);
+
+        if (re_match !== null) {
+            console.log(re_match)
+            let tld = re_match[re_match.length - 2];
+
+            console.log(tlds);
+            console.log(tld);
+            if (tlds.includes(tld.toUpperCase())) {
+                urlToOpen = "http://" + string;
+            }
+            else {
+                urlToOpen = "https://www.google.com/search?q=" + original_string;
+            }
         }
         else {
             urlToOpen = "https://www.google.com/search?q=" + original_string;
         }
 
+        console.log("urlToOpen:");
+        console.log(urlToOpen);
         if (urlToOpen !== null) {
             window.open(urlToOpen, "_self", "noreferrer=true");
         }
         else {
-            throw new Error("urlToOpen is null/undefined")
+            throw new Error("urlToOpen is null/undefined");
         }
     }
     catch (e) {
