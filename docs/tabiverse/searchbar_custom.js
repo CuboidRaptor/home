@@ -49,20 +49,44 @@ function reset() {
 // set listener to empty when done fading
 err_p.addEventListener("transitionend", reset);
 
+const drive_re = /^[a-z]:.*/i;
+
+// regexes for searched()
+const domain_re = /^(([a-z\-]+)\.)+([a-z\-]+)\//i;
+
 // when enter is pressed
 function searched(event) {
     event.preventDefault();
-    let url = search_input.value;
+    let string = search_input.value;
     
     try {
-        if (
-            url.startsWith("http:")
-            || url.startsWith("https:")
-            || url.startsWith("file:")
-        ) {
-            window.open(url, "_self");
+        let urlToOpen;
+        if ( // http/https/file
+            string.startsWith("http:")
+            || string.startsWith("https:")
+            || string.startsWith("file:")) {
+            urlToOpen = string;
+        }
+        else if ( // C: or / starting files indicating file:// paths on their respective operating systems
+            (drive_re.test(string) && window.navigator.platform.startsWith("Win")) // windows
+            || (string.startsWith("/") && (!window.navigator.platform.startsWith("Win")))) {
+            urlToOpen = "file://" + string;
         }
         else {
+            let slashed_string = string.endsWith("/") ? string : (string + "/");
+            if (domain_re.test(slashed_string)) {
+                urlToOpen = "http://" + string;
+            }
+            else {
+                urlToOpen = "https://www.google.com/search?q=" + string;
+            }
+        }
+
+        if (urlToOpen !== undefined) {
+            window.open(urlToOpen, "_self", "noreferrer=true");
+        }
+        else {
+            throw new Error("urlToOpen is not defined")
         }
     }
     catch (e) {
