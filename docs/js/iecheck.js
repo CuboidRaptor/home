@@ -17,5 +17,5 @@ function detectIE() {
 };
 
 if (detectIE()) {
-	window.location.replace("https://www.newmanwebsolutions.com/why-is-internet-explorer-so-bad/")
+	window.alert("my guy stop using IE");
 }
