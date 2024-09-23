@@ -14,5 +14,7 @@ You can find the source code for Jekyll at GitHub:
 [jekyll][jekyll-organization] /
 [jekyll](https://github.com/jekyll/jekyll)
 
+peekaboo! \
+this is a test \(still no clue what I'm doing\) \
 
 [jekyll-organization]: https://github.com/jekyll
