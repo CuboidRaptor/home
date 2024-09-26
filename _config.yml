@@ -1,8 +1,8 @@
-### VALUES YOU SHOULD CHANGE ###
+### VALUES YOU SHOULD NOT CHANGE (trust) ###
 
 # GENERAL SITE SETTINGS
 # title: This will be displayed as the website's name in your browser tab.
-title: Neumorphism
+title: Cuboid Raptor
 # description: This will be meta HTML tag content. This can be ignored.
 description: Personal website powered by Jekyll
 # baseurl: The subpath of your site
@@ -11,20 +11,20 @@ baseurl: "" # I removed this because it broke things
 
 # LANDING PAGE
 # username: This will displayed on the landing page as your name.
-username: Neumorphism
+username: Cuboid
 # typing_text: This will be typed before 'scroll down for more'.
 # > set this to your job title, e.g. Fullstack Developer
-typing_text: Jekyll Theme
+typing_text: Massive Nerd
 # email: Your E-Mail address for the email button.
-email: email@example.com
+email: fanjas112358@gmail.com
 # For every social button you want to display, set your username or userid
 # If you do not use one of the following websites, then leave it empty
 # > twitter_username:
-github_username: longpdo
-codepen_username: exampleUser
-dev_username: exampleUser
-linkedin_username: exampleUser
-twitter_username: exampleUser
+github_username: CuboidRaptor
+codepen_username: 
+dev_username: 
+linkedin_username: 
+twitter_username: 
 
 # ABOUT ME SECTION
 # show_aboutme_card:
@@ -32,9 +32,9 @@ twitter_username: exampleUser
 # > setting this to false, will omit the About Me section
 show_aboutme_card: true
 # about_me_title: The will be displayed as the title in the About Me section
-about_me_title: About Me
+about_me_title: naw who is this goofer
 # about_me_description: This will be displayed under the title.
-about_me_description: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. If you like this theme and want to use it for yourself, checkout the source code and the documentation at <a class="highlight-link" href="https://github.com/longpdo/neumorphism" target="_blank" rel="noreferrer"> Github </a>. You can also find me on <a class="highlight-link" href="https://jamstackthemes.dev/theme/jekyll-neumorphism/" target="_blank" rel="noreferrer">JAMstack Themes</a> and on <a class="highlight-link" href="https://jekyll-themes.com/neumorphism/" target="_blank" rel="noreferrer">Jekyll Themes</a>.
+about_me_description: I'm a massive nerd who enjoys coding, learning, and screwing with systems.<br>Honestly not much else to say, I've worked on a bunch of interesting projects for fun and some have been of use to me before, some still are, and some have just always been useless. Some never come into existence, probably because I got distracted by a squirrel outside my window or something. 
 
 # SKILLS SECTION
 # show_skills_card:
@@ -48,7 +48,7 @@ skills_title: Skills
 # show_timeline_card:
 # > setting this to true, will display the Timeline section
 # > setting this to false, will omit the Timeline section
-show_timeline_card: true
+show_timeline_card: false
 # timeline_title: The will be displayed as the title in the Timeline section
 timeline_title: Education & Experience
 # cv_download_link: The link where you host your cv.
@@ -63,7 +63,7 @@ show_projects_card: true
 # show_projects:
 # > setting this to true, will display your listed projects in _data/projects.yml
 # > setting this to false, will omit your listed projects
-show_projects: true
+show_projects: false
 # projects_title: The will be displayed as the title of your projects
 projects_title: Projects
 # show_os_projects:
@@ -81,12 +81,12 @@ show_contact_card: true
 # contact_title: The will be displayed as the title in the Contact section
 contact_title: Contact
 # contact_description: This will be displayed under the title.
-contact_description: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. If you like this theme and want to use it for yourself, checkout the source code and the documentation at <a class="highlight-link" href="https://github.com/longpdo/neumorphism" target="_blank" rel="noreferrer"> Github </a>.
+contact_description: 
 
 # GITHUB-METADATA
 # Set this to your forked repository
 # > e.g. <user>/<user>.github.io
-repository: longpdo/neumorphism
+repository: CuboidRaptor/cuboidraptor.github.io
 projects:
   # sortby:
   # > set this to pushed, if you want to sort your github repositories by time.
@@ -110,7 +110,7 @@ projects:
 # Set the id, if you want to track your website with Google Analytics
 # > set this to "", if you do not want to track with Google Analytics
 google-analytics:
-  id: "UA-158757509-2"
+  id: ""
 
 ### END OF VALUES YOU SHOULD CHANGE ###
 
@@ -125,4 +125,6 @@ exclude:
     "gulpfile.js",
     "node_modules",
     "package.json",
+    "yarn.lock",
+    "docs"
   ]
