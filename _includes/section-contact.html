@@ -66,4 +66,26 @@
     </div>
   </a>
   {% endif %}
+
+  {% if site.discord_username != null %}
+  <a class="social-link" aria-label="My Discord" target="_self" rel="noreferrer"
+    href="javascript:copyToClipboard('{{site.discord_username}}');">
+    <div class="social">
+      <svg class="social-svg" viewBox="0 0 48 48">
+        <use x="12" y="12" width="24" height="24" viewBox="0 0 48 48" xlink:href="{{ "/assets/img/brands.svg#discord" | prepend: site.baseurl }}"></use>
+      </svg>
+    </div>
+  </a>
+  {% endif %}
+
+  {% if site.reddit_username != null %}
+  <a class="social-link" aria-label="My Reddit" target="_blank" rel="noreferrer"
+    href="https://www.reddit.com/user/{{site.reddit_username}}">
+    <div class="social">
+      <svg class="social-svg" viewBox="0 0 48 48">
+        <use x="12" y="12" width="24" height="24" viewBox="0 0 48 48" xlink:href="{{ "/assets/img/brands.svg#reddit" | prepend: site.baseurl }}"></use>
+      </svg>
+    </div>
+  </a>
+  {% endif %}
 </div>
