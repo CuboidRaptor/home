@@ -20,7 +20,7 @@ $card-bg-color: linear-gradient(
   rgba(115, 115, 115, 0.15) 15%,
   rgba(43, 45, 47, 1) 80%
 );
-$primary-color: #ff073a;
+$primary-color: #07ffba;
 
 /* General */
 
@@ -909,4 +909,21 @@ a {
   100% {
     bottom: 0;
   }
+}
+
+/* Override for title-page div to fix particles */
+/* (this allows clicks to pass through the massive title div which makes the particles funner) */
+
+.landing-title {
+  pointer-events: none;
+}
+
+.landing-icons {
+  pointer-events: auto;
+}
+
+/* sass for copied! popup */
+.copytext {
+  color: #64d1e7;
+  /* transition: opacity 1s; */
 }

@@ -121,3 +121,20 @@ function randomizeOrder() {
   }
   parent.appendChild(frag);
 }
+
+const popupmsg = "<br>Copied!";
+
+function copyToClipboard(str) {
+  navigator.clipboard.writeText(str);
+  let copyelem = document.getElementsByClassName("copytext")[0];
+
+  copyelem.innerHTML = popupmsg;
+  setTimeout(() => (fadePopup()), 5000);
+}
+
+function fadePopup() {
+  let copyelem = document.getElementsByClassName("copytext")[0];
+  if (copyelem.innerHTML === popupmsg) {
+    copyelem.innerHTML = "";
+  }
+}

@@ -103,6 +103,39 @@
           <span class="label">Twitter</span>
         </a>
       {% endif %}
+
+      {% if site.discord_username != null %}
+        <a class="social-link" aria-label="My Discord" target="_self"
+          rel="noreferrer" href="javascript:copyToClipboard('{{site.discord_username}}');"
+        >
+          <svg viewBox="0 0 200 200" class="circle">
+            <circle cx="100" cy="100" r="80" />
+          </svg>
+          <div class="social">
+            <svg class="social-svg" viewBox="0 0 48 48">
+              <use x="12" y="12" width="24" height="24" viewBox="0 0 48 48" xlink:href="{{ "/assets/img/brands.svg#discord" | prepend: site.baseurl }}"></use>
+            </svg>
+          </div>
+          <span class="label">Discord</span>
+        </a>
+      {% endif %}
+
+      {% if site.reddit_username != null %}
+        <a class="social-link" aria-label="My Reddit" target="_blank"
+          rel="noreferrer" href="https://www.reddit.com/user/{{site.reddit_username}}"
+        >
+          <svg viewBox="0 0 200 200" class="circle">
+            <circle cx="100" cy="100" r="80" />
+          </svg>
+          <div class="social">
+            <svg class="social-svg" viewBox="0 0 48 48">
+              <use x="12" y="12" width="24" height="24" viewBox="0 0 48 48" xlink:href="{{ "/assets/img/brands.svg#reddit" | prepend: site.baseurl }}"></use>
+            </svg>
+          </div>
+          <span class="label">Reddit</span>
+        </a>
+      {% endif %}
     </div>
+    <p class="copytext"><br>amogus!</p>
   </div>
 </div>
