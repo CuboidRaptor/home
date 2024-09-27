@@ -123,18 +123,38 @@ function randomizeOrder() {
 }
 
 const popupmsg = "<br>Copied!";
+let timeouts = [];
+let listenerSet = false;
 
+// I know the repeated let copyelem looks bad but the js loads before the page for some reason
 function copyToClipboard(str) {
   navigator.clipboard.writeText(str);
   let copyelem = document.getElementsByClassName("copytext")[0];
 
+  for (let i = 0; i < timeouts.length; i++) {
+    clearTimeout(timeouts[i]);
+  }
+
+  reset();
   copyelem.innerHTML = popupmsg;
-  setTimeout(() => (fadePopup()), 5000);
+  timeouts.push(setTimeout(() => (fadePopup()), 5000));
+
+  if (!listenerSet) {
+    copyelem.addEventListener("transitionend", reset);
+    listenerSet = true;
+  }
 }
 
 function fadePopup() {
   let copyelem = document.getElementsByClassName("copytext")[0];
-  if (copyelem.innerHTML === popupmsg) {
-    copyelem.innerHTML = "";
-  }
+  copyelem.style.opacity = "0";
+}
+
+function reset() {
+  let copyelem = document.getElementsByClassName("copytext")[0];
+  copyelem.innerHTML = ""
+  copyelem.classList.remove("fade-transition");
+  copyelem.style.opacity = "1";
+  copyelem.offsetHeight; // it's to reflow and prevent animation trust
+  copyelem.classList.add("fade-transition");
 }

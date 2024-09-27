@@ -925,5 +925,8 @@ a {
 /* sass for copied! popup */
 .copytext {
   color: #64d1e7;
-  /* transition: opacity 1s; */
+}
+
+.copytext.fade-transition {
+  transition: opacity 1s;
 }
