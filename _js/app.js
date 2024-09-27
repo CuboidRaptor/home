@@ -122,7 +122,6 @@ function randomizeOrder() {
   parent.appendChild(frag);
 }
 
-const popupmsg = "<br>Copied!";
 let timeouts = [];
 let listenerSet = false;
 
@@ -136,7 +135,7 @@ function copyToClipboard(str) {
   }
 
   reset();
-  copyelem.innerHTML = popupmsg;
+  copyelem.innerHTML = "<br>Copied to Clipboard!";
   timeouts.push(setTimeout(() => (fadePopup()), 5000));
 
   if (!listenerSet) {
